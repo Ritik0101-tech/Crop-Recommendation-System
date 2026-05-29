@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+
+        Advice
+
+    </title>
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+</head>
+
+<body style="background:#f4fff4;">
+
+
+<div style="padding:40px;">
+
+
+    <h1 style="
+    color:green;
+    font-size:40px;">
+
+        Smart Crop Advice
+
+    </h1>
+
+
+
+    <!-- FERTILIZER -->
+
+    <div style="
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:15px;">
+
+        <h2 style="color:green;">
+
+            Fertilizer Advice
+
+        </h2>
+
+        <p style="
+        color:black;
+        font-size:20px;">
+
+            {{ fertilizer.advice }}
+
+        </p>
+
+    </div>
+
+
+
+    <!-- SOIL -->
+
+    <div style="
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:15px;">
+
+        <h2 style="color:green;">
+
+            Soil Advice
+
+        </h2>
+
+        <p style="
+        color:black;
+        font-size:20px;">
+
+            {{ soil.solution }}
+
+        </p>
+
+    </div>
+
+
+
+    <!-- TIPS -->
+
+    <div style="
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:15px;">
+
+        <h2 style="color:green;">
+
+            Farming Tips
+
+        </h2>
+
+        <ul style="
+        color:black;
+        font-size:20px;">
+
+            {% for tip in tips %}
+
+            <li>
+
+                {{ tip }}
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+
+    <a href="/result">
+
+        <button style="
+        margin-top:30px;
+        padding:12px 25px;
+        background:green;
+        color:white;
+        border:none;
+        border-radius:10px;
+        cursor:pointer;">
+
+            Back
+
+        </button>
+
+    </a>
+
+</div>
+
+
+</body>
+
+</html>

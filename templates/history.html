@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>History - Smart Crop AI</title>
+
+    <link rel="stylesheet"
+      href="{{ url_for('static',
+      filename='css/style.css') }}">
+
+    <link rel="icon"
+      href="/static/images/logo.png">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo-box">
+
+            <img
+            src="{{ url_for('static',
+            filename='images/logo.png') }}"
+            class="logo"
+            alt="logo">
+
+            <h2 id="mainTitle">
+
+                Smart Crop AI
+
+            </h2>
+
+        </div>
+
+
+        <div class="top-right">
+
+            <!-- LANGUAGE -->
+
+            <select id="languageSelect"
+                    onchange="changeLanguage()">
+
+                <option value="en">
+
+                    English
+
+                </option>
+
+                <option value="hi">
+
+                    हिन्दी
+
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HISTORY CONTAINER -->
+
+    <div class="history-container">
+
+        <h1 id="historyTitle">
+
+            Prediction History
+
+        </h1>
+
+
+        {% if records %}
+
+            {% for record in records %}
+
+            <div class="history-card">
+
+                <div class="history-top">
+
+                    <h2>
+
+                        🌾 {{ record.crop }}
+
+                    </h2>
+
+                </div>
+
+
+                <div class="history-details">
+
+                    <p>
+
+                        <b id="nitrogenText">
+
+                            Nitrogen:
+
+                        </b>
+
+                        {{ record.n }}
+
+                    </p>
+
+
+                    <p>
+
+                        <b id="phosphorusText">
+
+                            Phosphorus:
+
+                        </b>
+
+                        {{ record.p }}
+
+                    </p>
+
+
+                    <p>
+
+                        <b id="potassiumText">
+
+                            Potassium:
+
+                        </b>
+
+                        {{ record.k }}
+
+                    </p>
+
+
+                    <p>
+
+                        <b id="phText">
+
+                            pH:
+
+                        </b>
+
+                        {{ record.ph }}
+
+                    </p>
+
+
+                    <p>
+
+                        <b id="stateText">
+
+                            State:
+
+                        </b>
+
+                        {{ record.state }}
+
+                    </p>
+
+
+                    <p>
+
+                        <b id="districtText">
+
+                            District:
+
+                        </b>
+
+                        {{ record.district }}
+
+                    </p>
+
+
+                    <p>
+
+                        <b id="soilText">
+
+                            Soil Type:
+
+                        </b>
+
+                        {{ record.soil }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-history">
+
+                <h2 id="emptyText">
+
+                    No Prediction History Found
+
+                </h2>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- BUTTONS -->
+
+        <div class="history-buttons">
+
+            <a href="/dashboard">
+
+                <button id="dashboardBtn">
+
+                    Dashboard
+
+                </button>
+
+            </a>
+
+
+            <a href="/">
+
+                <button id="backBtn">
+
+                    Back
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- LANGUAGE SCRIPT -->
+
+    <script>
+
+        function changeLanguage(){
+
+            const lang = document.getElementById(
+                "languageSelect"
+            ).value
+
+
+            // HINDI
+
+            if(lang === "hi"){
+
+                document.getElementById(
+                    "mainTitle"
+                ).innerText =
+                "🌱 स्मार्ट क्रॉप एआई"
+
+
+                document.getElementById(
+                    "historyTitle"
+                ).innerText =
+                "भविष्यवाणी इतिहास"
+
+
+                document.getElementById(
+                    "dashboardBtn"
+                ).innerText =
+                "डैशबोर्ड"
+
+
+                document.getElementById(
+                    "backBtn"
+                ).innerText =
+                "वापस"
+
+
+                const nitrogen =
+                document.querySelectorAll(
+                    "#nitrogenText"
+                )
+
+                nitrogen.forEach(item=>{
+
+                    item.innerText =
+                    "नाइट्रोजन:"
+                })
+
+
+                const phosphorus =
+                document.querySelectorAll(
+                    "#phosphorusText"
+                )
+
+                phosphorus.forEach(item=>{
+
+                    item.innerText =
+                    "फॉस्फोरस:"
+                })
+
+
+                const potassium =
+                document.querySelectorAll(
+                    "#potassiumText"
+                )
+
+                potassium.forEach(item=>{
+
+                    item.innerText =
+                    "पोटैशियम:"
+                })
+
+
+                const ph =
+                document.querySelectorAll(
+                    "#phText"
+                )
+
+                ph.forEach(item=>{
+
+                    item.innerText =
+                    "पीएच:"
+                })
+
+
+                const state =
+                document.querySelectorAll(
+                    "#stateText"
+                )
+
+                state.forEach(item=>{
+
+                    item.innerText =
+                    "राज्य:"
+                })
+
+
+                const district =
+                document.querySelectorAll(
+                    "#districtText"
+                )
+
+                district.forEach(item=>{
+
+                    item.innerText =
+                    "जिला:"
+                })
+
+
+                const soil =
+                document.querySelectorAll(
+                    "#soilText"
+                )
+
+                soil.forEach(item=>{
+
+                    item.innerText =
+                    "मिट्टी प्रकार:"
+                })
+
+
+                const empty =
+                document.getElementById(
+                    "emptyText"
+                )
+
+                if(empty){
+
+                    empty.innerText =
+                    "कोई इतिहास नहीं मिला"
+                }
+            }
+
+
+            // ENGLISH
+
+            else{
+
+                location.reload()
+            }
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0">
+
+    <title>
+
+        Result
+
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/style.css') }}">
+
+</head>
+
+<body class="result-body">
+
+
+<div class="result-container">
+
+
+    <div class="result-header">
+
+        <h1>
+
+            Recommended Crops
+
+        </h1>
+
+
+        <div>
+
+            <a href="/dashboard">
+
+                <button>
+
+                    Back
+
+                </button>
+
+            </a>
+
+
+            <a href="/advice">
+
+                <button>
+
+                    Advice
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RESULTS -->
+
+    <div id="resultArea"
+         class="crop-grid">
+
+    </div>
+
+
+
+    <!-- WEATHER -->
+
+    <div id="weatherBox"
+         class="weather-box">
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+const data =
+JSON.parse(
+    localStorage.getItem(
+        "cropResult"
+    )
+)
+
+console.log(data)
+
+
+const resultArea =
+document.getElementById(
+    "resultArea"
+)
+
+const weatherBox =
+document.getElementById(
+    "weatherBox"
+)
+
+
+
+if(!data){
+
+    resultArea.innerHTML = `
+
+    <h2>
+
+        No prediction found
+
+    </h2>
+    `
+}
+
+else{
+
+    let html = ""
+
+
+    for(let i=0;
+        i<data.crops.length;
+        i++){
+
+        html += `
+
+        <div class="crop-card">
+
+            <img
+            src="${data.images[i]}"
+            class="crop-image">
+
+
+            <h2>
+
+                ${data.crops[i]}
+
+            </h2>
+
+
+            <h3>
+
+                Accuracy:
+                ${data.confidence[i]}%
+            </h3>
+
+        </div>
+        `
+    }
+
+
+    resultArea.innerHTML = html
+
+
+    weatherBox.innerHTML = `
+
+    <h2>
+
+        Weather Information
+
+    </h2>
+
+    <p>
+
+        Temperature:
+        ${data.weather.temperature}°C
+
+    </p>
+
+    <p>
+
+        Humidity:
+        ${data.weather.humidity}%
+
+    </p>
+
+    <p>
+
+        Rainfall:
+        ${data.weather.rainfall} mm
+
+    </p>
+
+    <p>
+
+        Condition:
+        ${data.weather.condition}
+
+    </p>
+    `
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Register
+
+    </title>
+
+    <link rel="stylesheet"
+      href="{{ url_for('static',
+      filename='css/style.css') }}">
+
+</head>
+
+<script>
+
+document.querySelector("form")
+.addEventListener(
+
+    "submit",
+
+    function(e){
+
+        const mobile =
+        document.getElementById(
+            "mobile"
+        ).value
+
+
+        const regex =
+        /^[0-9]{10}$/
+
+
+        if(!regex.test(mobile)){
+
+            e.preventDefault()
+
+            alert(
+                "Mobile number must contain exactly 10 digits"
+            )
+        }
+    }
+)
+
+</script>
+
+<body>
+
+
+<div class="auth-container">
+
+
+    <div class="auth-box">
+
+
+        <h1>
+
+            Smart Crop AI
+
+        </h1>
+
+
+        <h2>
+
+            Register
+
+        </h2>
+
+
+
+        <form action="/register"
+              method="POST">
+
+
+            <!-- NAME -->
+
+            <input type="text"
+
+                   id="name"
+
+                   name="name"
+
+                   placeholder="Full Name"
+
+                   required>
+
+
+
+            <input type="text"
+
+                id="mobile"
+
+                name="mobile"
+
+                placeholder="Mobile Number"
+
+                maxlength="10"
+
+                pattern="[0-9]{10}"
+
+                title="Enter 10 digit mobile number"
+
+                required>
+
+
+
+            <!-- PASSWORD -->
+
+            <input type="password"
+
+                   id="password"
+
+                   name="password"
+
+                   placeholder="Password"
+
+                   required>
+
+
+
+            <button type="submit">
+
+                Register
+
+            </button>
+
+        </form>
+
+
+
+        <p>
+
+            Already have account?
+
+            <a href="/login">
+
+                Login
+
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

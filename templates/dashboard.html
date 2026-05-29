@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Dashboard - Smart Crop AI
+
+    </title>
+
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="/static/css/style.css">
+
+
+    <!-- CHART -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- FAVICON -->
+
+    <link rel="icon"
+          href="/static/images/logo.png">
+
+</head>
+
+
+
+<body>
+
+
+<!-- =====================================
+SUCCESS POPUP
+===================================== -->
+
+<script>
+
+    const success =
+    "{{ success|default('') }}"
+
+
+    if(success){
+
+        alert(success)
+    }
+
+</script>
+
+
+
+<!-- =====================================
+NAVBAR
+===================================== -->
+
+<div class="navbar">
+
+
+    <!-- LEFT -->
+
+    <div class="logo-box">
+
+        <img
+        src="{{ url_for('static',
+        filename='images/logo.png') }}"
+        class="logo"
+        alt="logo">
+
+
+        <h2 id="mainTitle">
+
+            Smart Crop AI
+
+        </h2>
+
+    </div>
+
+
+
+    <!-- RIGHT -->
+
+    <div class="nav-right">
+
+
+        <!-- WEATHER -->
+
+        <div class="weather-mini">
+
+            <span id="weatherIcon">
+
+                ☀
+
+            </span>
+
+            <span id="weatherMiniText">
+
+                Loading...
+
+            </span>
+
+        </div>
+
+
+
+        <!-- LANGUAGE -->
+
+        <div class="language-box">
+
+            🌐
+
+            <select id="languageSelect"
+                    onchange="changeLanguage()">
+
+                <option value="en">
+
+                    English
+
+                </option>
+
+                <option value="hi">
+
+                    हिन्दी
+
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+FORM BOX
+===================================== -->
+
+<div class="form-box">
+
+
+    <h1 id="dashboardTitle">
+
+        Enter Soil Data
+
+    </h1>
+
+
+
+    <!-- N -->
+
+    <input type="number"
+           id="n"
+           placeholder="Nitrogen">
+
+
+
+    <!-- P -->
+
+    <input type="number"
+           id="p"
+           placeholder="Phosphorus">
+
+
+
+    <!-- K -->
+
+    <input type="number"
+           id="k"
+           placeholder="Potassium">
+
+
+
+    <!-- PH -->
+
+    <input type="number"
+           id="ph"
+           step="0.1"
+           placeholder="pH Value">
+
+
+
+    <!-- STATE -->
+
+    <label>
+
+        Select State
+
+    </label>
+
+    <select id="state">
+
+        <option value="">
+
+            Select State
+
+        </option>
+
+    </select>
+
+
+
+    <!-- DISTRICT -->
+
+    <label>
+
+        Select District
+
+    </label>
+
+    <select id="district">
+
+        <option value="">
+
+            Select District
+
+        </option>
+
+    </select>
+
+
+
+    <!-- SOIL -->
+
+    <label>
+
+        Soil Type
+
+    </label>
+
+    <select id="soil">
+
+        <option value="Loamy">
+
+            Loamy
+
+        </option>
+
+        <option value="Clay">
+
+            Clay
+
+        </option>
+
+        <option value="Sandy">
+
+            Sandy
+
+        </option>
+
+        <option value="Black">
+
+            Black
+
+        </option>
+
+        <option value="Red">
+
+            Red
+
+        </option>
+
+    </select>
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="btn-group">
+
+
+        <!-- PREDICT -->
+
+        <button onclick="predictCrop()"
+                id="predictBtn">
+
+            Fetch Crop
+
+        </button>
+
+
+
+        <!-- CLEAR -->
+
+        <button onclick="clearData()"
+                id="clearBtn">
+
+            Clear Data
+
+        </button>
+
+
+
+        <!-- HISTORY -->
+
+        <a href="/history">
+
+            <button>
+
+                History
+
+            </button>
+
+        </a>
+
+
+
+        <!-- LOGOUT -->
+
+        <a href="/logout">
+
+            <button>
+
+                Logout
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+VIDEO LOADING SCREEN
+===================================== -->
+
+<div class="loading-screen hidden"
+     id="loading">
+
+
+    <!-- VIDEO -->
+
+    <video autoplay
+           muted
+           loop
+           playsinline
+           class="loading-video">
+
+        <source
+            src="/static/videos/loading.mp4"
+            type="video/mp4">
+
+    </video>
+
+
+
+    <!-- OVERLAY -->
+
+    <div class="loading-overlay">
+
+        <div class="modern-loader"></div>
+
+        <h1 id="loadingTitle">
+
+            AI is analyzing your soil...
+
+        </h1>
+
+        <p id="loadingText1">
+
+            Fetching weather data...
+
+        </p>
+
+        <p id="loadingText2">
+
+            Predicting best crops...
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+JAVASCRIPT
+===================================== -->
+
+<script src="/static/js/app.js"></script>
+
+
+</body>
+
+</html>

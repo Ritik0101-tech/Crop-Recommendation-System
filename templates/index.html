@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Crop AI</title>
+
+    <link rel="stylesheet"
+      href="{{ url_for('static',
+      filename='css/style.css') }}">
+
+    <link rel="icon"
+      href="/static/images/logo.png">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo-box">
+
+            <img
+            src="{{ url_for('static',
+            filename='images/logo.png') }}"
+            class="logo"
+            alt="logo">
+
+            <h2 id="mainTitle">
+
+                Smart Crop AI
+
+            </h2>
+
+        </div>
+        
+        <div class="nav-right">
+
+            <!-- LANGUAGE -->
+
+            <select id="languageSelect"
+                    onchange="changeLanguage()">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="hi">
+                    हिन्दी
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- HERO SECTION -->
+
+    <div class="home-container">
+
+        <div class="home-card">
+
+            <h1 id="heroTitle">
+
+                AI-Powered Smart Crop Recommendation System
+
+            </h1>
+
+
+            <p id="heroText">
+
+                Predict the best crop using
+                soil nutrients, weather analysis,
+                and machine learning.
+
+            </p>
+
+
+            <!-- WEATHER CARD -->
+
+            <div class="weather-card">
+
+                <h3 id="weatherHeading">
+
+                    🌦 Live Weather
+
+                </h3>
+
+                <div id="weatherData">
+
+                    Loading weather...
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="home-buttons">
+
+                <a href="/login">
+
+                    <button id="loginBtn">
+
+                        Login
+
+                    </button>
+
+                </a>
+
+
+                <a href="/register">
+
+                    <button id="registerBtn">
+
+                        Register
+
+                    </button>
+
+                </a>
+
+
+                <a href="/dashboard">
+
+                    <button id="startBtn">
+
+                        Start Prediction
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p id="footerText">
+
+            Smart Farming using Artificial Intelligence 🌱
+
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        // =========================================
+        // WEATHER
+        // =========================================
+
+        async function loadWeather(){
+
+            navigator.geolocation.getCurrentPosition(
+
+                async(pos)=>{
+
+                    const lat = pos.coords.latitude
+
+                    const lon = pos.coords.longitude
+
+
+                    let response = await fetch(
+
+                        `/weather?lat=${lat}&lon=${lon}`
+                    )
+
+                    let data = await response.json()
+
+
+                    document.getElementById(
+                        "weatherData"
+                    ).innerHTML = `
+
+                    <p>
+                    🌡 Temperature:
+                    ${data.temperature}°C
+                    </p>
+
+                    <p>
+                    💧 Humidity:
+                    ${data.humidity}%
+                    </p>
+
+                    <p>
+                    🌧 Condition:
+                    ${data.condition}
+                    </p>
+                    `
+                }
+            )
+        }
+
+
+
+        // =========================================
+        // LANGUAGE
+        // =========================================
+
+        function changeLanguage(){
+
+            const lang =
+            document.getElementById(
+                "languageSelect"
+            ).value
+
+
+            // HINDI
+
+            if(lang === "hi"){
+
+                document.getElementById(
+                    "mainTitle"
+                ).innerText =
+                "🌱 स्मार्ट क्रॉप एआई"
+
+
+                document.getElementById(
+                    "heroTitle"
+                ).innerText =
+                "एआई आधारित स्मार्ट फसल अनुशंसा प्रणाली"
+
+
+                document.getElementById(
+                    "heroText"
+                ).innerText =
+                "मिट्टी और मौसम विश्लेषण का उपयोग करके सर्वोत्तम फसल की भविष्यवाणी करें।"
+
+
+                document.getElementById(
+                    "weatherHeading"
+                ).innerText =
+                "🌦 लाइव मौसम"
+
+
+                document.getElementById(
+                    "loginBtn"
+                ).innerText =
+                "लॉगिन"
+
+
+                document.getElementById(
+                    "registerBtn"
+                ).innerText =
+                "रजिस्टर"
+
+
+                document.getElementById(
+                    "startBtn"
+                ).innerText =
+                "फसल भविष्यवाणी शुरू करें"
+
+
+                document.getElementById(
+                    "footerText"
+                ).innerText =
+                "आर्टिफिशियल इंटेलिजेंस द्वारा स्मार्ट खेती 🌱"
+            }
+
+
+            // ENGLISH
+
+            else{
+
+                location.reload()
+            }
+        }
+
+
+
+        // =========================================
+        // START
+        // =========================================
+
+        window.onload = function(){
+
+            loadWeather()
+        }
+
+    </script>
+
+</body>
+</html>
